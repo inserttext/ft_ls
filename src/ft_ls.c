@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 15:45:03 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/15 00:56:38 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/15 20:38:35 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static char **parse_arg(char **arg, uint64_t *flags)
 		else if (!(list = listextend(list, arg, 1)))
 			return (0);
 	}
-	if (*++arg)
+	if (*arg)
 		list = listextend(list, arg, countarg(arg));
 	return (list);
 }
@@ -47,11 +47,8 @@ int	main(int argc, char **argv)
 	flag = 0;
 	list = 0;
 	if (argc > 1)
-		if ((list = parse_arg(argv, &flag)))
-		{
-			for (int i = 0; list[i]; i++)
-				ft_printf("%s\n", list[i]);
-		}
-	ls_core(flag, list);
+		list = parse_arg(argv, &flag);
+	ls_core(flag, &list);
+	free(list);
 	return (0);
 }
