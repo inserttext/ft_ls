@@ -1,32 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   structs.h                                          :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/17 19:23:00 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/17 20:59:23 by tingo            ###   ########.fr       */
+/*   Created: 2018/05/22 12:23:30 by tingo             #+#    #+#             */
+/*   Updated: 2018/05/22 12:29:30 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LS_STRUCTS_H
-# define LS_STRUCTS_H
+#include "../includes/ft_ls.h"
 
-typedef struct	s_argp
+void	ft_perror(char *msg)
 {
-	char *name;
-	char *key;
-	char *msg;
-}				t_argp;
+	char *error;
 
-struct			s_options
-{
-	int all;
-	int reverse;
-	int recursive;
-	int time;
-	int longform;
-};
-
-#endif
+	error = strerror(errno);
+	if (msg)
+	{
+		write(STDERR_FILENO, msg, ft_strlen(msg));
+		write(STDERR_FILENO, ": ", 2);
+	}
+	write(STDERR_FILENO, error, ft_strlen(error));
+	exit(0);
+}

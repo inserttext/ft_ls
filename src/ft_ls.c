@@ -6,25 +6,23 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:27 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/17 20:58:22 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/22 09:15:18 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static t_argp g_arglist[] = {
-	{"all", "a", "do not ignore files starting with ."},
-	{"long", "l", "use a long listing format"},
-	{"recursive", "R", "display subdirectories recursively"},
-	{"reverse", "r", "reverse order while sorting"},
-	{"time", "t", "sort by modification time, newest first"}
-};
-
-int	main(int argc, char **argv)
+int	main(int argc, char *argv[])
 {
-	char **list;
 	struct s_options opt;
+	t_node thing;
+	t_dirent **list;
 
-	ft_bzero(&opt, sizeof(struct s_options));
+	opt.all = 0;
+	thing.data = 0;
 	if (argc > 1)
+	{
+		write(1, "\n", 1);
+	}
+	return (0);
 }
