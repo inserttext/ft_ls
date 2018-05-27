@@ -4,7 +4,6 @@
 # include "../libft/includes/libft.h"
 # include <dirent.h>
 # include <errno.h>
-# include <error.h>
 # include <getopt.h>
 # include <sys/stat.h>
 # include <sys/types.h>
@@ -60,7 +59,7 @@ struct		s_var
 	size_t				cwd_alloc;
 	size_t				cwd_used;
 	ino_t				inode;
-	enum e_filetype		filetype;
+	enum e_filetype		type;
 	struct s_fileinfo	*cwd_file;
 	struct s_queue		*pending;
 	struct s_option		options;
