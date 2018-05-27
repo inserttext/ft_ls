@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   structs.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/24 15:42:48 by tingo             #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2018/05/22 12:36:33 by tingo            ###   ########.fr       */
-=======
-/*   Updated: 2018/05/17 19:25:10 by tingo            ###   ########.fr       */
->>>>>>> parent of 70546a1... backup before restart
+/*   Created: 2018/05/17 19:23:00 by tingo             #+#    #+#             */
+/*   Updated: 2018/05/17 20:59:23 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
+#ifndef LS_STRUCTS_H
+# define LS_STRUCTS_H
 
-# include "../libft/includes/libft.h"
-# include "structs.h"
-# include <dirent.h>
-# include <sys/stat.h>
-# include <sys/types.h>
+typedef struct	s_argp
+{
+	char *name;
+	char *key;
+	char *msg;
+}				t_argp;
+
+struct			s_options
+{
+	int all;
+	int reverse;
+	int recursive;
+	int time;
+	int longform;
+};
 
 #endif
