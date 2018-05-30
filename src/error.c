@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/26 19:00:43 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/26 19:27:20 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/29 18:08:36 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@ void	ls_error(char *msg)
 {
 	if (!msg)
 		msg = strerror(errno);
-	write(2, msg, ft_strlen(msg));
+	ft_fprintf(2, "%s\n", msg);
 	exit(2);
 }

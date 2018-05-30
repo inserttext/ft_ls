@@ -5,27 +5,15 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/05/17 18:24:27 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/26 19:32:58 by tingo            ###   ########.fr       */
+/*   Created: 2018/05/29 13:08:34 by tingo             #+#    #+#             */
+/*   Updated: 2018/05/29 20:27:17 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-/* static t_argp g_arglist[] = { */
-/* 	{"all", 'a', "do not ignore files starting with ."}, */
-/* 	{"long", 'l', "use a long listing format"}, */
-/* 	{"recursive", 'R', "display subdirectories recursively"}, */
-/* 	{"reverse", 'r', "reverse order while sorting"}, */
-/* 	{"time", 't', "sort by modification time, newest first"} */
-/* }; */
-
-int	main(/*int argc, char **argv*/)
+int	ls_core(struct s_ntree *root, struct s_options *opt)
 {
-	/* char **list; */
-	/* struct s_options opt; */
-
-	/* ft_bzero(&opt, sizeof(struct s_options)); */
-	/* if (argc > 1) */
+	if (root->data->name)
 	return (0);
 }
