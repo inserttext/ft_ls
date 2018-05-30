@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 15:42:48 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/29 21:00:21 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/30 15:47:44 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,14 @@ typedef struct	s_pending
 	struct s_fileinfo	*data;
 	struct s_pending	*next;
 }				t_pending;
+
+typedef struct	s_queue
+{
+	t_pending *head;
+	t_pending *tail;
+}				t_queue;
+
+t_queue			*g_pending;
 
 void			ls_error(char *msg);
 #endif
