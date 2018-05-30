@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 15:42:48 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/29 20:31:58 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/29 21:00:21 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,50 +36,34 @@ enum			e_filetype
 
 enum			e_sorttype
 {
+	sort_none = -1,
 	sort_name,
 	sort_time
 };
 
-typedef struct	s_argp
-{
-	char *name;
-	char key;
-	char *msg;
-}				t_argp;
-
 typedef struct	s_options
 {
-	int all;
-	int reverse;
-	int recursive;
-	int sorttype;
-	int longform;
+	int				all;
+	int				reverse;
+	int				recursive;
+	int				longform;
+	enum e_sorttype sorttype;
 }				t_options;
 
 typedef struct	s_fileinfo
 {
 	char			*name;
-	char			*fullname;
-	int				type;
+	char			*path;
 	ino_t			inode;
+	enum e_filetype filetype;
 	struct stat		*stat;
-	struct dirent	*dirent;
 }				t_fileinfo;
 
-typedef struct	s_ntree
+typedef struct	s_pending
 {
-	size_t				size;
-	size_t				fill;
 	struct s_fileinfo	*data;
-	struct s_ntree		**children;
-}				t_ntree;
-
-struct s_ntree	*new_node(const char *name, const char *dir);
-void			fatten_children(struct s_ntree *node);
-void			free_node(t_ntree **node);
+	struct s_pending	*next;
+}				t_pending;
 
 void			ls_error(char *msg);
-
-int				ls_core(struct s_ntree *root, struct s_options *opt);
-void			ls_qsort(struct s_ntree **lst, int64_t l, int64_t h);
 #endif
