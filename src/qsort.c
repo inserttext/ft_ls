@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/28 15:51:37 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/29 20:38:20 by tingo            ###   ########.fr       */
+/*   Updated: 2018/05/30 21:23:00 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static inline void	swap(void **a, void **b)
 		*b = swap;
 	}
 }
-
-int64_t				partition(struct s_ntree **list, int64_t l, int64_t h)
+static int64_t		partition(struct s_fileinfo **list, int64_t l, int64_t h)
 {
 	char	*cmp;
 	int64_t	i;
@@ -32,10 +31,10 @@ int64_t				partition(struct s_ntree **list, int64_t l, int64_t h)
 
 	i = l - 1;
 	j = 1;
-	cmp = list[h]->data->name;
+	cmp = list[h]->name;
 	while (j <= h - 1)
 	{
-		if (ft_strcmp(list[j]->data->name, cmp) < 0)
+		if (ft_strcmp(list[j]->name, cmp) < 0)
 		{
 			i++;
 			swap((void **)list + j, (void **)list + i);
@@ -46,7 +45,7 @@ int64_t				partition(struct s_ntree **list, int64_t l, int64_t h)
 	return (i + 1);
 }
 
-void				ls_qsort(struct s_ntree **lst, int64_t l, int64_t h)
+void				ls_qsort(struct s_fileinfo **lst, int64_t l, int64_t h)
 {
 	int64_t *stack;
 	int64_t top;
