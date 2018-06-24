@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/17 18:24:27 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/29 20:59:51 by tingo            ###   ########.fr       */
+/*   Updated: 2018/06/03 11:21:59 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static void assign(const char *s, struct s_options *opt)
 {
 	while (*++s)
 	{
-		if (*s== 'l')
+		if (*s == 'l')
 			opt->longform = 1;
-		else if (*s== 'a')
+		else if (*s == 'a')
 			opt->all = 1;
-		else if (*s== 'R')
+		else if (*s == 'R')
 			opt->recursive = 1;
-		else if (*s== 'r')
+		else if (*s == 'r')
 			opt->reverse = 1;
-		else if (*s== 't')
+		else if (*s == 't')
 			opt->sorttype = sort_time;
 		else
 		{
@@ -56,14 +56,16 @@ static size_t	argparse(int argc, char **argv, struct s_options *opt)
 			out = i;
 		i++;
 	}
-	if (!out)
-		out = i;
-	return (out);
+	return (out ? out : i);
 }
 
 int	main(int argc, char **argv)
 {
+	int					i;
+	int					ret;
 	struct s_options	opt;
 
+	i = argparse(argc, argv, &opt);
+	if (!(argc - i))
 	return (ret);
 }

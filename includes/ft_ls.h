@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/24 15:42:48 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/30 15:47:44 by tingo            ###   ########.fr       */
+/*   Updated: 2018/06/03 11:22:39 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ typedef struct	s_queue
 	t_pending *tail;
 }				t_queue;
 
-t_queue			*g_pending;
+t_queue			g_pending;
 
 void			ls_error(char *msg);
 #endif

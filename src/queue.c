@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/05/30 15:38:13 by tingo             #+#    #+#             */
-/*   Updated: 2018/05/30 15:52:34 by tingo            ###   ########.fr       */
+/*   Updated: 2018/06/03 11:23:13 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ struct s_pending	*dequeue()
 {
 	struct s_pending *out;
 
-	out = g_pending->head;
-	g_pending->head = out->next;
+	out = g_pending.head;
+	g_pending.head = out->next;
 	out->next = 0;
 	return(out);
 }
@@ -36,11 +36,11 @@ void	*enqueue(struct s_fileinfo *data)
 	struct s_pending *new;
 
 	new = new_node(data);
-	if (g_pending->tail)
-		g_pending->tail->next = new;
-	g_pending->tail = new;
-	if (!g_pending->head)
-		g_pending->head = new;
+	if (g_pending.tail)
+		g_pending.tail->next = new;
+	g_pending.tail = new;
+	if (!g_pending.head)
+		g_pending.head = new;
 }
 
 void	free_node(struct s_pending *node)
