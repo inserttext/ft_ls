@@ -22,5 +22,5 @@ uintmax_t	ingest_file(
 	f = &var->cwd_file[var->cwd_used];
 	ft_bzero(f, sizeof(t_fileinfo));
 	f->stat.st_ino = var->inode;
-	f->filetype = var->filetype;
+	f->filetype = var->type;
 }

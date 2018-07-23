@@ -4,7 +4,7 @@ static struct s_var	*init_var()
 {
 	struct s_var *var;
 
-	var = (struct s_var *)ft_memalloc(sizeof(struct s_var));
+	var = (struct s_var *)ft_calloc(1, sizeof(struct s_var));
 	var->line_length = 80;
 	var->cwd_alloc = 100;
 	var->cwd_file = malloc(sizeof(struct s_fileinfo) * 100);

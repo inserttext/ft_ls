@@ -6,11 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2018/05/27 13:10:10 by tingo            ###   ########.fr        #
-=======
-#    Updated: 2018/05/30 15:56:13 by tingo            ###   ########.fr        #
->>>>>>> master
+#    Updated: 2018/07/11 11:51:49 by tingo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,13 +19,19 @@ SDIR   = src
 LDIR   = libft
 IDIR   = includes
 
-_SRC   =
+_SRC   = arg.c \
+         ft_ls.c \
+         ingest.c \
+         pending.c \
+         util.c
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
 
 _OBJ   = $(_SRC:.c=.o)
 OBJ    = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 all: $(NAME)
+
+PHONY: $(NAME)
 
 $(NAME):
 	@make -C libft
