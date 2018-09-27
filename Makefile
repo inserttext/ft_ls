@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/07/24 17:26:57 by tingo            ###   ########.fr        #
+#    Updated: 2018/09/21 08:43:47 by timothy          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ SDIR   = src
 LDIR   = libft
 IDIR   = includes
 
-_SRC   =
+_SRC   = *
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
 
 _OBJ   = $(_SRC:.c=.o)
@@ -31,6 +31,8 @@ PHONY: $(NAME)
 
 $(NAME):
 	@make -C libft
+	@$(CC) $(CFLAGS) -c src/* -I $(IDIR) -L $(LDIR) -lft
+	@mkdir -p $(ODIR)
 	@$(CC) $(CFLAGS) -o $(NAME) src/* -I $(IDIR) -L $(LDIR) -lft
 
 clean:
