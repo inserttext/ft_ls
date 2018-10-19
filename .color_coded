@@ -1,0 +1,8 @@
+-x
+c
+-Wall
+-Werror
+-Wextra
+-std=gnu11
+-I
+includes
