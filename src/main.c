@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/25 14:33:21 by tingo            ###   ########.fr       */
+/*   Updated: 2018/10/28 02:54:57 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,14 @@ static struct s_opt	flags(int argc, int *ind, char **argv)
 
 static void			ft_ls(char **lst, struct s_opt o)
 {
-	int i;
+	int		i;
+	char	*p;
 
 	i = -1;
 	while(lst[++i])
+		push(lst[i], &o);
+	free(lst);
+	while ((p = pop(&o)))
 	{
 
 	}
