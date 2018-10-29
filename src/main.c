@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/28 02:54:57 by tingo            ###   ########.fr       */
+/*   Updated: 2018/10/28 18:15:37 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,12 +46,15 @@ static struct s_opt	flags(int argc, int *ind, char **argv)
 	return (opt);
 }
 
-static void			ft_ls(char **lst, struct s_opt o)
+static int			ft_ls(char **lst, struct s_opt o)
 {
-	int		i;
-	char	*p;
+	int			i;
+	char		*p;
+	struct stat	*s;
 
 	i = -1;
+	if (!(s = ft_calloc(sizeof(struct stat), 1)))
+		return (1);
 	while(lst[++i])
 		push(lst[i], &o);
 	free(lst);
@@ -59,6 +62,8 @@ static void			ft_ls(char **lst, struct s_opt o)
 	{
 
 	}
+	free(s);
+	return (0);
 }
 
 int					main(int argc, char *argv[])
@@ -79,7 +84,6 @@ int					main(int argc, char *argv[])
 			lst[argc - ind - 1] = argv[ind];
 			ind++;
 		}
-	ft_qsort(lst, 0, size ? size - 1 : 0, 0);
-	ft_ls(lst, opt);
-	return (0);
+	ft_qsort(lst, 0, size ? size - 1 : 0, opt.reverse);
+	return (ft_ls(lst, opt));
 }

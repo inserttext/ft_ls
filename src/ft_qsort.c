@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/25 15:15:32 by tingo            ###   ########.fr       */
+/*   Updated: 2018/10/28 18:12:27 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ static int	part(char **lst, int lo, int hi, int reverse)
 		if (i >= j)
 			return (j);
 		if (lst[i] != lst[j])
-			SWAP(*(uintptr_t *)(lst + i), *(uintptr_t *)(lst + j));
+			SWAP(*(char *)(lst + i), *(char *)(lst + j));
 	}
 }
 
