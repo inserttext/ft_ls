@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/28 18:15:37 by tingo            ###   ########.fr       */
+/*   Updated: 2018/11/19 02:51:43 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 static void			error(int c)
 {
 	ft_fprintf(2, "ft_ls: invalid option -- '%c'\n", c);
-	exit(0);
+	exit(1);
 }
 
 static struct s_opt	flags(int argc, int *ind, char **argv)
@@ -46,23 +46,36 @@ static struct s_opt	flags(int argc, int *ind, char **argv)
 	return (opt);
 }
 
-static int			ft_ls(char **lst, struct s_opt o)
+static void			prep(char **lst, struct s_opt *o)
 {
-	int			i;
-	char		*p;
-	struct stat	*s;
+	int i;
+	struct stat s;
 
 	i = -1;
-	if (!(s = ft_calloc(sizeof(struct stat), 1)))
-		return (1);
 	while(lst[++i])
-		push(lst[i], &o);
+	{
+		if (!stat(lst[i], &s))
+		{
+			if (S_ISDIR(s.st_mode))
+				push(lst[i], o);
+		}
+		else
+			ft_fprintf(2,
+				"ft_ls: cannot access '%s': No such file or directory\n",
+				lst[i]);
+	}
 	free(lst);
+}
+
+static int			ft_ls(char **lst, struct s_opt o)
+{
+	char		*p;
+
+	prep(lst, &o);
 	while ((p = pop(&o)))
 	{
-
+		free(p);
 	}
-	free(s);
 	return (0);
 }
 

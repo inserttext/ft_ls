@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/10/20 16:58:32 by tingo            ###   ########.fr        #
+#    Updated: 2018/11/19 03:08:21 by tingo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,8 +19,10 @@ SDIR   = src
 LDIR   = libft
 IDIR   = includes
 
-_SRC   = main.c \
-         ft_qsort.c
+_SRC   = ft_ls.c \
+         ft_qsort.c \
+         main.c \
+         stack.c
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))
 
 _OBJ   = $(_SRC:.c=.o)
