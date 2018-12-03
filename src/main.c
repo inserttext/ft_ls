@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/11/19 02:51:43 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/02 20:08:49 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ static void			prep(char **lst, struct s_opt *o)
 	i = -1;
 	while(lst[++i])
 	{
-		if (!stat(lst[i], &s))
+		if (!lstat(lst[i], &s))
 		{
 			if (S_ISDIR(s.st_mode))
 				push(lst[i], o);
+			else
+				print((struct s_file){lst[i], lst[i], s}, o, !lst[i + 1]);
 		}
 		else
-			ft_fprintf(2,
-				"ft_ls: cannot access '%s': No such file or directory\n",
-				lst[i]);
+			ft_fprintf(2, "ft_ls: cannot access '%s'\n", lst[i]);
 	}
 	free(lst);
 }
@@ -74,6 +74,8 @@ static int			ft_ls(char **lst, struct s_opt o)
 	prep(lst, &o);
 	while ((p = pop(&o)))
 	{
+		if (expandd(p, &o))
+			ft_fprintf(2, "ft_ls: cannot access '%s'\n", p);
 		free(p);
 	}
 	return (0);
@@ -81,9 +83,9 @@ static int			ft_ls(char **lst, struct s_opt o)
 
 int					main(int argc, char *argv[])
 {
-	int			ind;
-	char		**lst;
-	int			size;
+	int				ind;
+	char			**lst;
+	int				size;
 	struct s_opt	opt;
 
 	opt = flags(argc, &ind, argv);
@@ -97,6 +99,6 @@ int					main(int argc, char *argv[])
 			lst[argc - ind - 1] = argv[ind];
 			ind++;
 		}
-	ft_qsort(lst, 0, size ? size - 1 : 0, opt.reverse);
+	ft_qsortc(lst, 0, size ? size - 1 : 0, opt);
 	return (ft_ls(lst, opt));
 }

@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 18:05:05 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/28 02:33:12 by tingo            ###   ########.fr       */
+/*   Updated: 2018/11/27 19:44:10 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 # define MATCH(a,b) if (a)b
 # define OR(a,b) else if (a)b
-# define OTHERWISE(a) else (a)
+# define OTHERWISE(a) else a
 
 struct	s_node
 {
@@ -36,7 +36,16 @@ struct	s_opt
 	struct s_node	*top;
 };
 
+struct	s_file
+{
+	char* path;
+	char* name;
+	struct stat stat;
+};
+
 int		push(const char *name, struct s_opt *p);
 char	*pop(struct s_opt *p);
+int		print(struct s_file f, struct s_opt *o, int last);
+int		expandd(const char *p, struct s_opt *o);
 
 #endif

@@ -6,12 +6,12 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/11/19 03:08:21 by tingo            ###   ########.fr        #
+#    Updated: 2018/12/02 20:14:03 by tingo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC     = gcc
-CFLAGS = -Wall -Werror -Wextra -std=gnu11
+CFLAGS = -Wall -Werror -Wextra -std=gnu11 -g
 NAME   = ft_ls
 
 ODIR   = obj
@@ -20,7 +20,9 @@ LDIR   = libft
 IDIR   = includes
 
 _SRC   = ft_ls.c \
+				 dir.c \
          ft_qsort.c \
+         ft_qsortc.c \
          main.c \
          stack.c
 SRC    = $(patsubst %,$(SDIR)/%,$(_SRC))

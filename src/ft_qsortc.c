@@ -1,19 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_qsort.c                                         :+:      :+:    :+:   */
+/*   ft_qsortc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/02 20:02:54 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/02 20:02:39 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
 
-static void swap(struct s_file **a, struct s_file **b)
+static void swap(char **a, char **b)
 {
 	void *tmp;
 
@@ -32,11 +32,11 @@ static int	timecmp(char *a, char *b)
 
 	return (sa.st_ctime - sb.st_ctime);
 }
-static int	partt(struct s_file **lst, int lo, int hi, int reverse)
+static int	partt(char **lst, int lo, int hi, int reverse)
 {
-	struct s_file	*p;
-	int				i;
-	int				j;
+	char	*p;
+	int		i;
+	int		j;
 
 	p = lst[lo];
 	i = lo - 1;
@@ -45,13 +45,13 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 	{
 		if (reverse)
 		{
-			while (timecmp(lst[++i]->path, p->path) > 0);
-			while (timecmp(lst[--j]->path, p->path) < 0);
+			while (timecmp(lst[++i], p) > 0);
+			while (timecmp(lst[--j], p) < 0);
 		}
 		else
 		{
-			while (timecmp(lst[++i]->path, p->path) < 0);
-			while (timecmp(lst[--j]->path, p->path) > 0);
+			while (timecmp(lst[++i], p) < 0);
+			while (timecmp(lst[--j], p) > 0);
 		}
 		if (i >= j)
 			return (j);
@@ -61,11 +61,11 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 }
 
 
-static int	part(struct s_file **lst, int lo, int hi, int reverse)
+static int	part(char **lst, int lo, int hi, int reverse)
 {
-	struct s_file	*p;
-	int				i;
-	int				j;
+	char	*p;
+	int		i;
+	int		j;
 
 	p = lst[lo];
 	i = lo - 1;
@@ -74,13 +74,13 @@ static int	part(struct s_file **lst, int lo, int hi, int reverse)
 	{
 		if (reverse)
 		{
-			while (ft_strcmp(lst[++i]->name, p->name) > 0);
-			while (ft_strcmp(lst[--j]->name, p->name) < 0);
+			while (ft_strcmp(lst[++i], p) > 0);
+			while (ft_strcmp(lst[--j], p) < 0);
 		}
 		else
 		{
-			while (ft_strcmp(lst[++i]->name, p->name) < 0);
-			while (ft_strcmp(lst[--j]->name, p->name) > 0);
+			while (ft_strcmp(lst[++i], p) < 0);
+			while (ft_strcmp(lst[--j], p) > 0);
 		}
 		if (i >= j)
 			return (j);
@@ -89,7 +89,7 @@ static int	part(struct s_file **lst, int lo, int hi, int reverse)
 	}
 }
 
-void		ft_qsortf(struct s_file **lst, int l, int h, struct s_opt o)
+void		ft_qsortc(char **lst, int l, int h, struct s_opt o)
 {
 	int	stack[h - l + 1];
 	int	top;
