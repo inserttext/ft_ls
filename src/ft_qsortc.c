@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/02 20:02:39 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/03 16:25:10 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	partt(char **lst, int lo, int hi, int reverse)
 	j = hi + 1;
 	while (1)
 	{
-		if (reverse)
+		if (!reverse)
 		{
 			while (timecmp(lst[++i], p) > 0);
 			while (timecmp(lst[--j], p) < 0);

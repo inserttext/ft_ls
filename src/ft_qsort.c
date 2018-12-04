@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/02 20:02:54 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/03 16:24:57 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 	j = hi + 1;
 	while (1)
 	{
-		if (reverse)
+		if (!reverse)
 		{
 			while (timecmp(lst[++i]->path, p->path) > 0);
 			while (timecmp(lst[--j]->path, p->path) < 0);

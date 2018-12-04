@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 21:11:02 by tingo             #+#    #+#             */
-/*   Updated: 2018/11/28 17:16:02 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/03 16:20:28 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,18 +41,25 @@ int				print(struct s_file f, struct s_opt *o, int last)
 {
 	char		mode[11];
 	char		*time;
+	char		*link;
 
+	link = ft_calloc(256, sizeof(char));
 	ft_bzero(mode, 11);
 	if (!o->list)
-		ft_printf("%s%c", f.name, last ? '\n' : '\t');
+		ft_printf("%s%s", f.name, last ? "\n\n" : "\t");
 	else
 	{
 		time = ctime(&f.stat.st_ctime);
 		time[ft_strlen(time) - 1] = 0;
 		mode[0] = setmode(mode + 1, f.stat);
-		ft_printf("%s %lu %s %s %ld %s %s\n",
+		if (mode[0] == 'l')
+			readlink(f.path, link, 255);
+		ft_printf("%s %lu %s %s %ld %s %s %s %s\n",
 		mode, f.stat.st_nlink, getpwuid(f.stat.st_uid)->pw_name,
-		getgrgid(f.stat.st_gid)->gr_name, f.stat.st_size, time, f.name);
+		getgrgid(f.stat.st_gid)->gr_name, f.stat.st_size, time, f.name,
+		mode[0] == 'l' ? "->" : "", mode[0] == 'l' ? link : "");
+		if (last)
+			write(1, "\n", 1);
 	}
 	return (0);
 }

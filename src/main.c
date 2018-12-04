@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/02 20:08:49 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/03 15:54:33 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int					main(int argc, char *argv[])
 	size = argc - ind;
 	lst = ft_calloc(sizeof(char*), size + 2);
 	if (ind == argc)
-		lst[0] = "./";
+		lst[0] = ".";
 	else
 		while (ind < argc)
 		{

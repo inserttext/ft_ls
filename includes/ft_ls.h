@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 18:05:05 by tingo             #+#    #+#             */
-/*   Updated: 2018/11/27 19:44:10 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/03 15:47:20 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,14 @@ struct	s_opt
 	int				reverse;
 	int				time;
 	struct s_node	*top;
+	size_t 			blk;
 };
 
 struct	s_file
 {
-	char* path;
-	char* name;
-	struct stat stat;
+	char*		path;
+	char*		name;
+	struct stat	stat;
 };
 
 int		push(const char *name, struct s_opt *p);
