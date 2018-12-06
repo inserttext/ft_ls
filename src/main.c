@@ -6,78 +6,101 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/10/18 20:11:33 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 04:37:33 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
+#include "../includes/ft_qsort.h"
 
-#define MATCH(a,b) if (a)b
-#define OR(a,b) else if (a)b
-#define OTHERWISE(a) else (a)
-
-static struct s_opt	flags(int argc, char ***argv)
+static void			error(int c)
 {
-	int				i;
+	ft_fprintf(2, "ft_ls: invalid option -- '%c'\n", c);
+	exit(1);
+}
+
+static struct s_opt	flags(int argc, int *ind, char **argv)
+{
 	struct s_opt	opt;
 
-	i = 0;
-	opt = (struct s_opt){0, 0, 0, 0, 0};
-	while (++i < argc && (*++*argv)[0] == '-')
+	*ind = 0;
+	opt = (struct s_opt){0};
+	while (++*ind < argc && *argv[*ind] == '-')
 	{
-		if (!ft_strcmp((**argv), "--"))
-			break ;
-		while (*++**argv)
+		if (!ft_strcmp((argv[*ind]), "--"))
 		{
-			MATCH(***argv == 'l', opt.list = 1);
-			OR(***argv == 'R', opt.recursive = 1);
-			OR(***argv == 'a', opt.all = 1);
-			OR(***argv == 'r', opt.reverse = 1);
-			OR(***argv == 't', opt.time = 1);
-			OTHERWISE(exit(0));
+			++*ind;
+			return (opt);
+		}
+		while (*++argv[*ind])
+		{
+			MATCH(*argv[*ind] == 'l', opt.list = 1);
+			OR(*argv[*ind] == 'R', opt.recursive = 1);
+			OR(*argv[*ind] == 'a', opt.all = 1);
+			OR(*argv[*ind] == 'r', opt.reverse = 1);
+			OR(*argv[*ind] == 't', opt.time = 1);
+			OTHERWISE(error(*argv[*ind]));
 		}
 	}
 	return (opt);
 }
 
-int	main(int argc, char *argv[])
+static void			prep(char **lst, struct s_opt *o)
 {
-	flags(argc, &argv);
-	printf("%c", **argv);
+	int i;
+	struct stat s;
+
+	i = -1;
+	while(lst[++i])
+	{
+		if (!lstat(lst[i], &s))
+		{
+			if (S_ISDIR(s.st_mode))
+				push(lst[i], o);
+			else
+				print((struct s_file){lst[i], lst[i], s}, o, !lst[i + 1]);
+		}
+		else
+			ft_fprintf(2, "ft_ls: cannot access '%s'\n", lst[i]);
+	}
+	free(lst);
+}
+
+static int			ft_ls(char **lst, struct s_opt o)
+{
+	char		*p;
+
+	prep(lst, &o);
+	if (o.top->next)
+		o.multi = 1;
+	while ((p = pop(&o)))
+	{
+		if (expandd(p, &o))
+			ft_fprintf(2, "ft_ls: cannot access '%s'\n", p);
+		free(p);
+	}
 	return (0);
 }
 
-/*
-** static struct s_opt	flags(int argc, char **argv)
-** {
-** 	int				i;
-** 	struct s_opt	opt;
-**
-** 	i = 1;
-** 	opt = (struct s_opt){0, 0, 0, 0, 0};
-** 	while (i < argc && argv[i][0] == '-')
-** 	{
-** 		if (!ft_strcmp(argv[i], "--"))
-** 			break ;
-** 		while (*argv[i])
-** 		{
-** 			if (*argv[i] == 'l')
-** 				opt.list = 1;
-** 			else if (*argv[i] == 'R')
-** 				opt.recursive = 1;
-** 			else if (*argv[i] == 'a')
-** 				opt.all = 1;
-** 			else if (*argv[i] == 'r')
-** 				opt.reverse = 1;
-** 			else if (*argv[i] == 't')
-** 				opt.time = 1;
-** 			else
-** 				exit(0);
-** 			argv[i]++;
-** 		}
-** 		i++;
-** 	}
-** 	return (opt);
-** }
-*/
+int					main(int argc, char *argv[])
+{
+	int				ind;
+	char			**lst;
+	int				size;
+	struct s_opt	opt;
+
+	opt = flags(argc, &ind, argv);
+	size = argc - ind;
+	lst = ft_calloc(sizeof(char*), size + 2);
+	if (ind == argc)
+		lst[0] = ".";
+	else
+		while (ind < argc)
+		{
+			lst[argc - ind - 1] = argv[ind];
+			ind++;
+		}
+	ft_qsortc(lst, 0, size ? size - 1 : 0, opt);
+	return (ft_ls(lst, opt));
+}
