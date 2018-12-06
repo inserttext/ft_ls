@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/03 15:54:33 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 04:37:33 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,8 @@ static int			ft_ls(char **lst, struct s_opt o)
 	char		*p;
 
 	prep(lst, &o);
+	if (o.top->next)
+		o.multi = 1;
 	while ((p = pop(&o)))
 	{
 		if (expandd(p, &o))

@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/12/03 16:00:33 by tingo            ###   ########.fr        #
+#    Updated: 2018/12/03 19:11:10 by tingo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,7 +39,7 @@ $(NAME):
 	@$(CC) $(CFLAGS) -c $(SRC) -I $(IDIR) -L $(LDIR) -lft
 	@mkdir -p $(ODIR)
 	@mv $(_OBJ) $(ODIR)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) -I $(IDIR) -L $(LDIR) -lft
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/obj/* -I $(IDIR) -L $(LDIR) -lft
 
 clean:
 	@/bin/rm -rf $(ODIR)

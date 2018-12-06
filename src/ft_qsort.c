@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/03 16:24:57 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 02:39:11 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 }
 
 
-static int	part(struct s_file **lst, int lo, int hi, int reverse)
+static int	partf(struct s_file **lst, int lo, int hi, int reverse)
 {
 	struct s_file	*p;
 	int				i;
@@ -102,7 +102,7 @@ void		ft_qsortf(struct s_file **lst, int l, int h, struct s_opt o)
 	{
 		h = stack[top--];
 		l = stack[top--];
-		p = o.time ? partt(lst, l, h, o.reverse) : part(lst, l, h, o.reverse);
+		p = o.time ? partt(lst, l, h, o.reverse) : partf(lst, l, h, o.reverse);
 		if (p > l)
 		{
 			stack[++top] = l;

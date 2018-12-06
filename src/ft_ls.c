@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 21:11:02 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/03 16:20:28 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 03:52:19 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,13 +40,13 @@ static char		setmode(char *m, struct stat s)
 int				print(struct s_file f, struct s_opt *o, int last)
 {
 	char		mode[11];
+	char		link[256];
 	char		*time;
-	char		*link;
 
-	link = ft_calloc(256, sizeof(char));
+	ft_bzero(link, 256);
 	ft_bzero(mode, 11);
 	if (!o->list)
-		ft_printf("%s%s", f.name, last ? "\n\n" : "\t");
+		ft_printf("%s%s", f.name, last ? "\n" : "\t");
 	else
 	{
 		time = ctime(&f.stat.st_ctime);
@@ -58,8 +58,6 @@ int				print(struct s_file f, struct s_opt *o, int last)
 		mode, f.stat.st_nlink, getpwuid(f.stat.st_uid)->pw_name,
 		getgrgid(f.stat.st_gid)->gr_name, f.stat.st_size, time, f.name,
 		mode[0] == 'l' ? "->" : "", mode[0] == 'l' ? link : "");
-		if (last)
-			write(1, "\n", 1);
 	}
 	return (0);
 }

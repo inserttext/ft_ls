@@ -6,13 +6,15 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:54:52 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/03 16:10:07 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 04:35:36 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
 #include "../includes/ft_qsort.h"
+
+#define COND (o->multi || o->recursive)
 
 static char*			search(char* s, char c)
 {
@@ -37,20 +39,23 @@ static size_t			extend(struct s_file ***p, size_t size)
 	return (size);
 }
 
-static struct s_file	*new_file(const char *path, struct dirent *f)
+static struct s_file	*new_file(char *path, struct dirent *f)
 {
-	struct s_file *new;
+	struct s_file	*new;
+	int				flag;
 
+	flag = path[ft_strlen(path) - 1] == '/';
 	new = ft_calloc(1, sizeof(struct s_file));
-	new->name = ft_strjoin(path, "/");
+	new->name = flag ? path : ft_strjoin(path, "/");
 	new->path = ft_strjoin(new->name, f->d_name);
-	free(new->name);
+	if (!flag)
+		free(new->name);
 	new->name = search(new->path, '/');
 	lstat(new->path, &new->stat);
 	return (new);
 }
 
-static size_t			dir(struct s_file ***lst, const char *p, DIR *d,
+static size_t			dir(struct s_file ***lst, char *p, DIR *d,
 							struct s_opt *o)
 {
 	struct dirent	*read;
@@ -58,7 +63,7 @@ static size_t			dir(struct s_file ***lst, const char *p, DIR *d,
 	size_t			size;
 
 	i = 0;
-	size = 10;
+	size = 20;
 	o->blk = 0;
 	*lst = ft_calloc(size, sizeof(struct s_file *));
 	while ((read = readdir(d)) != 0)
@@ -71,33 +76,32 @@ static size_t			dir(struct s_file ***lst, const char *p, DIR *d,
 				size = extend(lst, size);
 		}
 	}
-	return (i - 1);
+	return (i);
 }
 
-int						expandd(const char *p, struct s_opt *o)
+int						expandd(char *p, struct s_opt *o)
 {
 	DIR				*d;
 	struct s_file	**f;
 	size_t			i;
 
-	if (!(d = opendir(p)))
-		return (1);
-	i = dir(&f, p, d, o);
-	ft_qsortf(f, 0, i, *o);
-	ft_printf("%s:\n", p);
-	if (o->list)
-		ft_printf("total %lu\n", o->blk/2);
-	i = -1;
-	while (f[++i])
+	MATCH (!(d = opendir(p)), return (1));
+	ft_printf("%c%s%s", o->first ? '\n' : 0, COND ? p : "", COND ? ":\n" : "");
+	MATCH ((i = dir(&f, p, d, o)), ft_qsortf(f, 0, i - 1, *o));
+	MATCH (o->recursive, loaddir(f, o));
+	MATCH (o->list, ft_printf("total %lu\n", o->blk / 2));
+	if (i)
 	{
-		if (o->recursive && S_ISDIR(f[i]->stat.st_mode) &&
-			ft_strcmp(f[i]->name, "..") && ft_strcmp(f[i]->name, "."))
-			push(f[i]->path, o);
-		print(*(f[i]), o, !f[i + 1]);
-		free(f[i]->path);
-		free(f[i]);
+		i = -1;
+		while (f[++i])
+		{
+			print(*(f[i]), o, !f[i + 1]);
+			free(f[i]->path);
+			free(f[i]);
+		}
 	}
 	closedir(d);
 	free(f);
+	o->first = 1;
 	return (0);
 }
