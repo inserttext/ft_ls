@@ -6,12 +6,12 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 18:05:05 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 04:12:53 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:29:16 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LS_H
-#define FT_LS_H
+# define FT_LS_H
 
 # include <dirent.h>
 # include <sys/stat.h>
@@ -22,7 +22,7 @@
 
 struct	s_node
 {
-	char*			name;
+	char			*name;
 	struct s_node	*next;
 };
 
@@ -37,13 +37,13 @@ struct	s_opt
 	int				first;
 	struct s_node	*top;
 	struct s_node	*rtop;
-	size_t 			blk;
+	size_t			blk;
 };
 
 struct	s_file
 {
-	char*		path;
-	char*		name;
+	char		*path;
+	char		*name;
 	struct stat	stat;
 };
 

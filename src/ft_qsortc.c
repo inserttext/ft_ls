@@ -6,14 +6,16 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 04:44:07 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:35:42 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
 
-static void swap(char **a, char **b)
+#define WHILE(a) while(a);
+
+static void	swap(char **a, char **b)
 {
 	void *tmp;
 
@@ -29,9 +31,9 @@ static int	timecmp(char *a, char *b)
 
 	stat(a, &sa);
 	stat(b, &sb);
-
 	return (sa.st_ctime - sb.st_ctime);
 }
+
 static int	partt(char **lst, int lo, int hi, int reverse)
 {
 	char	*p;
@@ -45,13 +47,13 @@ static int	partt(char **lst, int lo, int hi, int reverse)
 	{
 		if (!reverse)
 		{
-			while (timecmp(lst[++i], p) > 0);
-			while (timecmp(lst[--j], p) < 0);
+			WHILE(timecmp(lst[++i], p) > 0);
+			WHILE(timecmp(lst[--j], p) < 0);
 		}
 		else
 		{
-			while (timecmp(lst[++i], p) < 0);
-			while (timecmp(lst[--j], p) > 0);
+			WHILE(timecmp(lst[++i], p) < 0);
+			WHILE(timecmp(lst[--j], p) > 0);
 		}
 		if (i >= j)
 			return (j);
@@ -59,7 +61,6 @@ static int	partt(char **lst, int lo, int hi, int reverse)
 			swap(lst + i, lst + j);
 	}
 }
-
 
 static int	part(char **lst, int lo, int hi, int reverse)
 {
@@ -74,13 +75,13 @@ static int	part(char **lst, int lo, int hi, int reverse)
 	{
 		if (reverse)
 		{
-			while (ft_strcmp(lst[++i], p) < 0);
-			while (ft_strcmp(lst[--j], p) > 0);
+			WHILE(ft_strcmp(lst[++i], p) < 0);
+			WHILE(ft_strcmp(lst[--j], p) > 0);
 		}
 		else
 		{
-			while (ft_strcmp(lst[++i], p) > 0);
-			while (ft_strcmp(lst[--j], p) < 0);
+			WHILE(ft_strcmp(lst[++i], p) > 0);
+			WHILE(ft_strcmp(lst[--j], p) < 0);
 		}
 		if (i >= j)
 			return (j);

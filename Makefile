@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/12/06 19:11:09 by marvin           ###   ########.fr        #
+#    Updated: 2018/12/06 19:26:07 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,10 +42,12 @@ $(NAME):
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/obj/* -I $(IDIR) -L $(LDIR) -lft
 
 clean:
+	@make clean -C libft
 	@/bin/rm -rf $(ODIR)
 	@echo remove $(ODIR)
 
 fclean: clean
+	@make fclean -C libft
 	@/bin/rm -rf $(NAME)
 	@echo remove $(NAME)
 
