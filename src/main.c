@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 19:01:12 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 23:59:22 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ static void			prep(char **lst, struct s_opt *o)
 
 	i = -1;
 	while(lst[++i])
-	{
 		if (!lstat(lst[i], &s))
 		{
 			if (S_ISDIR(s.st_mode))
@@ -61,9 +60,6 @@ static void			prep(char **lst, struct s_opt *o)
 			else
 				print((struct s_file){lst[i], lst[i], s}, o, !lst[i + 1]);
 		}
-		else
-			ft_fprintf(2, "ft_ls: cannot access '%s'\n", lst[i]);
-	}
 	free(lst);
 }
 
@@ -101,6 +97,8 @@ int					main(int argc, char *argv[])
 			lst[argc - ind - 1] = argv[ind];
 			ind++;
 		}
-	ft_qsortc(lst, 0, size ? size - 1 : 0, opt);
+	size = verify(lst);
+	if (size > 0)
+		ft_qsortc(lst, 0, size - 1, opt);
 	return (ft_ls(lst, opt));
 }
