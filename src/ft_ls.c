@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/11 21:11:02 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 03:52:19 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:11:56 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <grp.h>
 #include <time.h>
 
-static char		setmode(char *m, struct stat s)
+static char		ft_setmode(char *m, struct stat s)
 {
 	m[0] = s.st_mode & S_IRUSR ? 'r' : '-';
 	m[1] = s.st_mode & S_IWUSR ? 'w' : '-';
@@ -51,7 +51,7 @@ int				print(struct s_file f, struct s_opt *o, int last)
 	{
 		time = ctime(&f.stat.st_ctime);
 		time[ft_strlen(time) - 1] = 0;
-		mode[0] = setmode(mode + 1, f.stat);
+		mode[0] = ft_setmode(mode + 1, f.stat);
 		if (mode[0] == 'l')
 			readlink(f.path, link, 255);
 		ft_printf("%s %lu %s %s %ld %s %s %s %s\n",

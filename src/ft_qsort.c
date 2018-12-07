@@ -6,14 +6,17 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 02:39:11 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 21:21:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
+#include "../includes/ft_qsort.h"
 
-static void swap(struct s_file **a, struct s_file **b)
+#define WHILE(a) while(a);
+
+static void	swap(struct s_file **a, struct s_file **b)
 {
 	void *tmp;
 
@@ -22,16 +25,6 @@ static void swap(struct s_file **a, struct s_file **b)
 	*b = tmp;
 }
 
-static int	timecmp(char *a, char *b)
-{
-	struct stat sa;
-	struct stat sb;
-
-	stat(a, &sa);
-	stat(b, &sb);
-
-	return (sa.st_ctime - sb.st_ctime);
-}
 static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 {
 	struct s_file	*p;
@@ -45,13 +38,13 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 	{
 		if (!reverse)
 		{
-			while (timecmp(lst[++i]->path, p->path) > 0);
-			while (timecmp(lst[--j]->path, p->path) < 0);
+			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) > 0)
+			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) < 0)
 		}
 		else
 		{
-			while (timecmp(lst[++i]->path, p->path) < 0);
-			while (timecmp(lst[--j]->path, p->path) > 0);
+			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) < 0)
+			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) > 0)
 		}
 		if (i >= j)
 			return (j);
@@ -59,7 +52,6 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 			swap(lst + i, lst + j);
 	}
 }
-
 
 static int	partf(struct s_file **lst, int lo, int hi, int reverse)
 {
@@ -74,18 +66,38 @@ static int	partf(struct s_file **lst, int lo, int hi, int reverse)
 	{
 		if (reverse)
 		{
-			while (ft_strcmp(lst[++i]->name, p->name) > 0);
-			while (ft_strcmp(lst[--j]->name, p->name) < 0);
+			WHILE(ft_strcmp(lst[++i]->name, p->name) > 0);
+			WHILE(ft_strcmp(lst[--j]->name, p->name) < 0);
 		}
 		else
 		{
-			while (ft_strcmp(lst[++i]->name, p->name) < 0);
-			while (ft_strcmp(lst[--j]->name, p->name) > 0);
+			WHILE(ft_strcmp(lst[++i]->name, p->name) < 0);
+			WHILE(ft_strcmp(lst[--j]->name, p->name) > 0);
 		}
 		if (i >= j)
 			return (j);
 		if (lst[i] != lst[j])
 			swap(lst + i, lst + j);
+	}
+}
+
+static void	xd(struct s_file **lst, struct s_opt o)
+{
+	int		l;
+	int		h;
+	long	time;
+
+	l = 0;
+	o.time = 0;
+	o.reverse = !o.reverse;
+	while (lst[l])
+	{
+		h = l;
+		time = lst[l]->stat.st_ctime;
+		while (lst[h] && lst[h]->stat.st_ctime == time)
+			h++;
+		ft_qsortf(lst, l, h - 1, o);
+		l = h;
 	}
 }
 
@@ -114,4 +126,6 @@ void		ft_qsortf(struct s_file **lst, int l, int h, struct s_opt o)
 			stack[++top] = h;
 		}
 	}
+	if (o.time)
+		xd(lst, o);
 }

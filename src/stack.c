@@ -6,14 +6,14 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 06:30:32 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 04:23:27 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:30:10 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
 
-int		push(const char *name, struct s_opt *p)
+int				push(const char *name, struct s_opt *p)
 {
 	struct s_node *n;
 
@@ -45,7 +45,7 @@ static void		npush(struct s_opt *p)
 {
 	struct s_node *t;
 
-	while(p->rtop)
+	while (p->rtop)
 	{
 		t = p->rtop->next;
 		p->rtop->next = p->top;

@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:54:52 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 19:05:54 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 21:13:22 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static size_t			dir(struct s_file ***lst, char *p, DIR *d,
 		{
 			(*lst)[i] = new_file(p, read);
 			o->blk += (*lst)[i++]->stat.st_blocks;
-			if (i == size)
+			if (i == size - 1)
 				size = extend(lst, size);
 		}
 	}

@@ -6,12 +6,12 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:49:38 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/02 18:30:18 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:29:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_QSORT_H
-#define FT_QSORT_H
+# define FT_QSORT_H
 
 # include "ft_ls.h"
 
