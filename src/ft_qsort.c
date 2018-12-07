@@ -6,12 +6,13 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 20:09:09 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/06 21:21:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
+#include "../includes/ft_qsort.h"
 
 #define WHILE(a) while(a);
 
@@ -80,6 +81,26 @@ static int	partf(struct s_file **lst, int lo, int hi, int reverse)
 	}
 }
 
+static void	xd(struct s_file **lst, struct s_opt o)
+{
+	int		l;
+	int		h;
+	long	time;
+
+	l = 0;
+	o.time = 0;
+	o.reverse = !o.reverse;
+	while (lst[l])
+	{
+		h = l;
+		time = lst[l]->stat.st_ctime;
+		while (lst[h] && lst[h]->stat.st_ctime == time)
+			h++;
+		ft_qsortf(lst, l, h - 1, o);
+		l = h;
+	}
+}
+
 void		ft_qsortf(struct s_file **lst, int l, int h, struct s_opt o)
 {
 	int	stack[h - l + 1];
@@ -105,4 +126,6 @@ void		ft_qsortf(struct s_file **lst, int l, int h, struct s_opt o)
 			stack[++top] = h;
 		}
 	}
+	if (o.time)
+		xd(lst, o);
 }
