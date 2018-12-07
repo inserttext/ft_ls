@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:54:52 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 04:35:36 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:05:54 by tingo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ int						expandd(char *p, struct s_opt *o)
 	ft_printf("%c%s%s", o->first ? '\n' : 0, COND ? p : "", COND ? ":\n" : "");
 	MATCH ((i = dir(&f, p, d, o)), ft_qsortf(f, 0, i - 1, *o));
 	MATCH (o->recursive, loaddir(f, o));
-	MATCH (o->list, ft_printf("total %lu\n", o->blk / 2));
+	MATCH (o->list, ft_printf("total %lu\n", o->blk));
 	if (i)
 	{
 		i = -1;
