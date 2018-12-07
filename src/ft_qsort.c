@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 21:21:49 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/06 23:44:30 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "../includes/ft_ls.h"
 #include "../includes/ft_qsort.h"
 
-#define WHILE(a) while(a);
+#define WHILE(a) while(a)
 
 static void	swap(struct s_file **a, struct s_file **b)
 {
@@ -38,13 +38,13 @@ static int	partt(struct s_file **lst, int lo, int hi, int reverse)
 	{
 		if (!reverse)
 		{
-			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) > 0)
-			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) < 0)
+			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) > 0);
+			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) < 0);
 		}
 		else
 		{
-			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) < 0)
-			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) > 0)
+			WHILE((lst[++i]->stat.st_ctime - p->stat.st_ctime) < 0);
+			WHILE((lst[--j]->stat.st_ctime - p->stat.st_ctime) > 0);
 		}
 		if (i >= j)
 			return (j);

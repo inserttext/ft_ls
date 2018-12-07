@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/27 16:54:52 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 21:13:22 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/07 00:11:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ static struct s_file	*new_file(char *path, struct dirent *f)
 	return (new);
 }
 
-static size_t			dir(struct s_file ***lst, char *p, DIR *d,
+size_t					dir(struct s_file ***lst, char *p, DIR *d,
 							struct s_opt *o)
 {
 	struct dirent	*read;
@@ -85,11 +85,10 @@ int						expandd(char *p, struct s_opt *o)
 	struct s_file	**f;
 	size_t			i;
 
-	MATCH (!(d = opendir(p)), return (1));
+	if (!(d = opendir(p)))
+		return (1);
 	ft_printf("%c%s%s", o->first ? '\n' : 0, COND ? p : "", COND ? ":\n" : "");
-	MATCH ((i = dir(&f, p, d, o)), ft_qsortf(f, 0, i - 1, *o));
-	MATCH (o->recursive, loaddir(f, o));
-	MATCH (o->list, ft_printf("total %lu\n", o->blk));
+	i = start(&f, p, d, o);
 	if (i)
 	{
 		i = -1;

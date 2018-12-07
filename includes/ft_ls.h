@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 18:05:05 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/07 00:05:03 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/07 00:09:35 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,7 @@ char	*pop(struct s_opt *p);
 int		print(struct s_file f, struct s_opt *o, int last);
 int		expandd(char *p, struct s_opt *o);
 int		verify(char	**lst);
+size_t	dir(struct s_file ***lst, char *p, DIR *d, struct s_opt *o);
+size_t	start(struct s_file ***f, char *p, DIR *d, struct s_opt *o);
 
 #endif

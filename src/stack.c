@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/21 06:30:32 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 19:30:10 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/07 00:15:12 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int				loaddir(struct s_file **f, struct s_opt *p)
 	while (f[++i])
 	{
 		if (S_ISDIR(f[i]->stat.st_mode) && ft_strcmp(f[i]->name, "..")
-				&& ft_strcmp(f[i]->name, "."))
+			&& ft_strcmp(f[i]->name, "."))
 			ppush(f[i]->path, p);
 	}
 	npush(p);

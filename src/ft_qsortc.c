@@ -6,14 +6,14 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/20 01:31:33 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 19:35:42 by marvin           ###   ########.fr       */
+/*   Updated: 2018/12/06 23:46:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../libft/includes/libft.h"
 #include "../includes/ft_ls.h"
 
-#define WHILE(a) while(a);
+#define WHILE(a) while(a)
 
 static void	swap(char **a, char **b)
 {
