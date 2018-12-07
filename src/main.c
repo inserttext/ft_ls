@@ -6,7 +6,7 @@
 /*   By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/10/18 19:51:59 by tingo             #+#    #+#             */
-/*   Updated: 2018/12/06 19:01:12 by tingo            ###   ########.fr       */
+/*   Updated: 2018/12/06 19:12:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,8 @@ static struct s_opt	flags(int argc, int *ind, char **argv)
 	struct s_opt	opt;
 
 	*ind = 0;
-	opt = (struct s_opt){0};
+	/* opt = (struct s_opt){0}; */
+	ft_bzero(&opt, sizeof(struct s_opt));
 	while (++*ind < argc && *argv[*ind] == '-')
 	{
 		if (!ft_strcmp((argv[*ind]), "--"))

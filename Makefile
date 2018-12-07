@@ -6,7 +6,7 @@
 #    By: tingo <tingo@student.42.us.org>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/03 23:52:47 by tingo             #+#    #+#              #
-#    Updated: 2018/12/03 19:11:10 by tingo            ###   ########.fr        #
+#    Updated: 2018/12/06 19:11:09 by marvin           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ all: $(NAME)
 
 $(NAME):
 	@make -C libft
-	@$(CC) $(CFLAGS) -c $(SRC) -I $(IDIR) -L $(LDIR) -lft
+	@$(CC) $(CFLAGS) -c $(SRC) -I $(IDIR)
 	@mkdir -p $(ODIR)
 	@mv $(_OBJ) $(ODIR)
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) libft/obj/* -I $(IDIR) -L $(LDIR) -lft
